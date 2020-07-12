@@ -7,7 +7,7 @@
 module.exports = {
   /* Your site config here */
   siteMetadata: {
-    title: 'Full-Stack Bootcamp',
+    title: 'Analogue Design',
     author: 'Lukasz Pudlo'
   },
   plugins: [
@@ -18,6 +18,7 @@ module.exports = {
           name: 'src',
           path: `${__dirname}/src/`
 	   }
-	}
+	},
+    'gatsby-transformer-remark'
   ]
 }
