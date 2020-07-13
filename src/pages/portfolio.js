@@ -5,7 +5,7 @@ import Layout from '../components/layout'
 import { graphql, useStaticQuery } from "gatsby"
 
 const PortfolioPage = () => {
-  render () {
+    
     const data = useStaticQuery(graphql`
 	  query {
         allMarkdownRemark {
@@ -20,16 +20,24 @@ const PortfolioPage = () => {
   }
 }
 	`)
-    const listItems = data.map((d) => <li key={d.name}>{d.name}</li>);
 
 	return (
 		<Layout>
+          <h1>Portfolio</h1>
 		  <ol>
-            {listItems}
+            {
+              data.allMarkdownRemark.edges.map((edge)=> {
+                return (
+                  <li>
+                    <h2>{edge.node.frontmatter.title}</h2>
+                    <p>{edge.node.frontmatter.date}</p>
+                  </li>
+				)     
+			  })  
+			}  
           </ol>
 		</Layout>
 	);
-  }
 }
 
 export default PortfolioPage
