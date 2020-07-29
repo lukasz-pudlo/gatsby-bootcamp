@@ -1,6 +1,6 @@
 const path = require('path')
 
-module.exports.onCreateNode = (node, actions) => {
+module.exports.onCreateNode = ({node, actions}) => {
   const { createNodeField } = actions
 
   if (node.internal.type === 'MarkDownRemark') {
@@ -15,7 +15,7 @@ module.exports.onCreateNode = (node, actions) => {
   }
 }
 
-module.exports.createPages = async ({ graphql, actions}) => {
+module.exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
   const portfolioTemplate = path.resolve('./src/templates/portfolio.js')
   const res = await graphql(`
@@ -33,13 +33,13 @@ module.exports.createPages = async ({ graphql, actions}) => {
   `)
 
   res.data.allMarkdownRemark.edges.forEach((edge) => {
-    createPage({
+      createPage({
        component: portfolioTemplate,
-       path: `/portfolio/${edge.node.fields.slug}`,
+       path: `/portfolio/${edge.node.fields.slug}`
        context: {
-         slug: edge.node.fields.slug
+        slug: edge.node.fields.slug
 	   }
-	})
-})
+	  })
+  }) 
 
 }
